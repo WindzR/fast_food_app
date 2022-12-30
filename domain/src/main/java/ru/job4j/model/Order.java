@@ -15,7 +15,9 @@ public class Order {
 
     private Date created;
 
-    private List<Dish> orderList = new ArrayList<>();
+    private List<Product> orderList = new ArrayList<>();
+
+    private Status status;
 
     public static Order of(String name) {
         Order order = new Order();
@@ -23,7 +25,7 @@ public class Order {
         return order;
     }
 
-    public void addDish(Dish dish) {
-        orderList.add(dish);
+    public void addDish(Product product) {
+        orderList.add(product);
     }
 }
