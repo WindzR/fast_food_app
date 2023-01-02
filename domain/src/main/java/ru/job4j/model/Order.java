@@ -17,15 +17,17 @@ public class Order {
 
     private List<Product> orderList = new ArrayList<>();
 
-    private Status status;
+    private OrderStatus status;
 
     public static Order of(String name) {
         Order order = new Order();
         order.name = name;
+        order.created = new Date();
+        order.status = OrderStatus.CREATED;
         return order;
     }
 
-    public void addDish(Product product) {
+    public void addProduct(Product product) {
         orderList.add(product);
     }
 }

@@ -9,11 +9,14 @@ public class Product {
 
     private String name;
 
+    private int price;
+
     private boolean available;
 
-    public static Product of(String name, boolean available) {
+    public static Product of(String name, int price, boolean available) {
         Product product = new Product();
         product.name = name;
+        product.price = price;
         product.available = available;
         return product;
     }
