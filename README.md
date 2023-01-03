@@ -1,5 +1,5 @@
 ![](https://img.shields.io/badge/Maven-_3.2-red)
-![](https://img.shields.io/badge/Java-_18-orange)
+![](https://img.shields.io/badge/Java-_17-orange)
 ![](https://img.shields.io/badge/SpringBoot-_2-darkorange)
 ![](https://img.shields.io/badge/SpringDataJPA-blue)
 ![](https://img.shields.io/badge/PostgerSQL-_13.2-blue)

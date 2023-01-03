@@ -3,20 +3,21 @@ package ru.job4j.service;
 import ru.job4j.model.Dish;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DishService {
 
-    void addNewDish(Dish dish);
+    Dish addNewDish(Dish dish);
 
-    void removeDishById(int id);
+    boolean removeDishById(int id);
 
-    Dish changeDish(Dish dish);
+    Optional<Dish> changeDish(int id, Dish dish);
 
-    Dish setUnavailableDish(int id);
+    Optional<Dish> setUnavailableDish(int id);
 
     List<Dish> getAvailableDishes();
 
     List<Dish> getAllDishes();
 
-    Dish getDishById(int id);
+    Optional<Dish> getDishById(int id);
 }
