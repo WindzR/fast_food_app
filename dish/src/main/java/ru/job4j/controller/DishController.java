@@ -75,6 +75,11 @@ public class DishController {
         );
     }
 
+    /**
+     * Изменить флаг доступности блюда
+     * @param id редактируемого блюда
+     * @return ответ об успешности/неуспешности запроса
+     */
     @PatchMapping("/unavailable/{id}")
     public ResponseEntity<DishDTO> setUnavailableDish(@PathVariable int id) {
         var dishRepository = dishService.setUnavailableDish(id);
@@ -94,18 +99,31 @@ public class DishController {
         );
     }
 
+    /**
+     * Получить список доступных блюд
+     * @return список блюд
+     */
     @GetMapping("/get-available")
     public List<DishDTO> getAvailableDishes() {
         List<Dish> availableDishes = dishService.getAvailableDishes();
         return mapToDishDTO(availableDishes);
     }
 
+    /**
+     * Получить список всех, зарегестрированных в сервисе блюд
+     * @return список блюд
+     */
     @GetMapping("/all")
     public List<DishDTO> getAllDishes() {
         List<Dish> allDishes = dishService.getAllDishes();
         return mapToDishDTO(allDishes);
     }
 
+    /**
+     * Получить блюдо по его id
+     * @param id блюда
+     * @return блюдо / сообщение, что блюдо не найдено
+     */
     @GetMapping("/{id}")
     public ResponseEntity<DishDTO> getDishById(@PathVariable int id) {
         var dish = dishService.getDishById(id);
