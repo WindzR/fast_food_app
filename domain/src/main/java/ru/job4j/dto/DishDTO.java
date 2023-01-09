@@ -12,6 +12,14 @@ public class DishDTO {
 
     private long cookingTime;
 
+    public static DishDTO of(int id, String name, long cookingTime) {
+        DishDTO dto = new DishDTO();
+        dto.setId(id);
+        dto.setName(name);
+        dto.setCookingTime(cookingTime);
+        return dto;
+    }
+
     public static DishDTO fromDish(Dish dish) {
         DishDTO dishDTO = new DishDTO();
         dishDTO.setName(dish.getName());
