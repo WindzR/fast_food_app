@@ -3,9 +3,7 @@ package ru.job4j.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dto.DishDTO;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
@@ -34,5 +32,45 @@ public class MemoryRepository {
         Collection<DishDTO> values = map.values();
         System.out.println(values);
         return map.values();
+    }
+
+    public Optional<DishDTO> getDishById(int id) {
+        Collection<DishDTO> dishes = getDishes();
+        return dishes.stream()
+                .filter(dish -> dish.getId() == id)
+                .findFirst();
+    }
+
+    public boolean updateDish(DishDTO dish) {
+        boolean isUpdated = false;
+        Integer key = 0;
+        for (Integer curKey : map.keySet()) {
+            var currentValue = map.get(curKey);
+            if (currentValue.getId() == dish.getId()) {
+                key = curKey;
+                isUpdated = true;
+                break;
+            }
+        }
+        System.out.println("Key = " + key);
+        System.out.println("Dish = " + dish);
+        map.replace(key, dish);
+        return isUpdated;
+    }
+
+    public boolean deleteById(int id) {
+        boolean isDeleted = false;
+        Integer key = 0;
+        for (Integer curKey : map.keySet()) {
+            var currentValue = map.get(curKey);
+            if (currentValue.getId() == id) {
+                key = curKey;
+                isDeleted = true;
+                map.remove(key);
+                break;
+            }
+        }
+        System.out.println("Key = " + key);
+        return isDeleted;
     }
 }

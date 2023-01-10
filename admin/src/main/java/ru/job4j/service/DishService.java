@@ -13,7 +13,7 @@ import java.util.List;
 public class DishService {
 
     @Value("${api-url}")
-    private String URL;
+    private String baseURL;
 
     private final RestTemplate client;
 
@@ -22,7 +22,7 @@ public class DishService {
     }
 
     public DishDTO addNewDish(DishDTO dish) {
-        String url = URL + "/new-dish";
+        String url = baseURL + "/new-dish";
         System.out.println(url);
         return client.postForEntity(
                 url, dish, DishDTO.class
@@ -30,7 +30,7 @@ public class DishService {
     }
 
     public boolean removeDish(String id) {
-        String url = URL + "/" + id;
+        String url = baseURL + "/" + id;
         System.out.println(url);
         return client.exchange(
                 url,
@@ -41,7 +41,7 @@ public class DishService {
     }
 
     public boolean changeDish(String id, DishDTO dish) {
-        String url = URL + "/" + id;
+        String url = baseURL + "/" + id;
         System.out.println(url);
         return client.exchange(
                 url,
@@ -52,7 +52,7 @@ public class DishService {
     }
 
     public boolean setUnavailableDish(String id) {
-        String url = URL + "unavailable/" + id;
+        String url = baseURL + "unavailable/" + id;
         System.out.println(url);
         return client.exchange(
                 url,
@@ -63,7 +63,7 @@ public class DishService {
     }
 
     public List<DishDTO> getAvailableDishes() {
-        String url = URL + "/get-available";
+        String url = baseURL + "/get-available";
         System.out.println(url);
         return client.exchange(
                 url,
@@ -73,7 +73,7 @@ public class DishService {
     }
 
     public List<DishDTO> getAllDishes() {
-        String url = URL + "/all";
+        String url = baseURL + "/all";
         System.out.println(url);
         return client.exchange(
                 url,
@@ -83,7 +83,7 @@ public class DishService {
     }
 
     public DishDTO getDishById(String id) {
-        String url = URL + "/" + id;
+        String url = baseURL + "/" + id;
         System.out.println(url);
         return client.getForEntity(
                 url,
