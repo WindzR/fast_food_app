@@ -4,12 +4,15 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import ru.job4j.dto.DishDTO;
 
 import java.util.List;
+import java.util.Optional;
 
+@Service
 public class DishService {
 
     @Value("${api-url}")
@@ -29,7 +32,7 @@ public class DishService {
         ).getBody();
     }
 
-    public boolean removeDish(String id) {
+    public boolean removeDish(int id) {
         String url = baseURL + "/" + id;
         System.out.println(url);
         return client.exchange(
@@ -40,7 +43,7 @@ public class DishService {
         ).getStatusCode() != HttpStatus.NOT_FOUND;
     }
 
-    public boolean changeDish(String id, DishDTO dish) {
+    public boolean changeDish(int id, DishDTO dish) {
         String url = baseURL + "/" + id;
         System.out.println(url);
         return client.exchange(
@@ -82,12 +85,13 @@ public class DishService {
         ).getBody();
     }
 
-    public DishDTO getDishById(String id) {
+    public Optional<DishDTO> getDishById(int id) {
         String url = baseURL + "/" + id;
         System.out.println(url);
-        return client.getForEntity(
+        DishDTO dish = client.getForEntity(
                 url,
                 DishDTO.class
         ).getBody();
+        return Optional.of(dish);
     }
 }

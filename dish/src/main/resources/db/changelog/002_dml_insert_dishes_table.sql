@@ -1,0 +1,1 @@
+insert into dishes (name, cooking_time, available) values ('Angus Burger', 320, true);

@@ -4,23 +4,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.dto.DishDTO;
-import ru.job4j.repository.MemoryRepository;
+import ru.job4j.service.DishService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
-@RequestMapping("/dishes")
+@RequestMapping("/admins")
 public class IndexController {
 
-    private final MemoryRepository repository;
+    private final DishService service;
 
-    public IndexController(final MemoryRepository repository) {
-        this.repository = repository;
+    public IndexController(final DishService service) {
+        this.service = service;
     }
 
     @GetMapping("/index")
     public String getAll(Model model) {
-        model.addAttribute("dishes", repository.getDishes());
+        List<DishDTO> allDishes = service.getAllDishes();
+        System.out.println(allDishes);
+        model.addAttribute("dishes", allDishes);
         return "index";
     }
 
@@ -39,39 +42,39 @@ public class IndexController {
         var name = request.getParameter("name");
         long cookingTime = Long.parseLong(request.getParameter("cookingTime"));
         DishDTO dto = DishDTO.of(0, name, cookingTime);
-        repository.saveDish(dto);
-        return "redirect:/dishes/index";
+        service.addNewDish(dto);
+        return "redirect:/admins/index";
     }
 
     @GetMapping("/{id}")
     public String getById(Model model, @PathVariable int id) {
-        var updateDish = repository.getDishById(id);
+        var updateDish = service.getDishById(id);
         if (updateDish.isEmpty()) {
             model.addAttribute("message", "Dish with such id IS NOT FOUND!");
             return "errors/404";
         }
         model.addAttribute("dish", updateDish.get());
-        return "dishes/update";
+        return "admins/update";
     }
 
     @PostMapping("/update")
     public String update(@ModelAttribute DishDTO dish, Model model) {
-        boolean isUpdated = repository.updateDish(dish);
+        boolean isUpdated = service.changeDish(dish.getId(), dish);
         System.out.println("STATUS OF UPDATING DISH : " + isUpdated);
         if (!isUpdated) {
             model.addAttribute("message", "Dish with such id IS NOT FOUND!");
             return "errors/404";
         }
-        return "redirect:/dishes/index";
+        return "redirect:/admins/index";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(Model model, @PathVariable int id) {
-        boolean isDeleted = repository.deleteById(id);
+        boolean isDeleted = service.removeDish(id);
         if (!isDeleted) {
             model.addAttribute("message", "Dish with such id IS NOT FOUND!");
             return "errors/404";
         }
-        return "redirect:/dishes/index";
+        return "redirect:/admins/index";
     }
 }

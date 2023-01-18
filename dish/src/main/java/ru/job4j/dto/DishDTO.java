@@ -26,6 +26,7 @@ public class DishDTO {
 
     public static DishDTO fromDish(Dish dish) {
         DishDTO dishDTO = new DishDTO();
+        dishDTO.setId(dish.getId());
         dishDTO.setName(dish.getName());
         dishDTO.setCookingTime(dish.getCookingTime());
         return dishDTO;

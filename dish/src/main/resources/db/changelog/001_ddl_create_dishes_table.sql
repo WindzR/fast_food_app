@@ -1,4 +1,4 @@
-create table dishes(
+create table IF NOT EXISTS dishes(
     id serial primary key,
     name VARCHAR(50) NOT NULL unique,
     cooking_time bigint,

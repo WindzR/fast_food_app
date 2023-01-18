@@ -19,8 +19,8 @@
             <div class="collapse navbar-collapse">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link active" href="/">Главная</a>
-                    <a class="nav-item nav-link" th:href="@{dishes/index}">Все позиции</a>
-                    <a class="nav-item nav-link" th:href="@{/dishes/create-page}">Новая позиция</a>
+                    <a class="nav-item nav-link" th:href="@{admins/index}">Все позиции</a>
+                    <a class="nav-item nav-link" th:href="@{/admins/create-page}">Новая позиция</a>
                 </div>
             </div>
         </div>
@@ -43,10 +43,10 @@
                     <td th:text="${dish.name}" />
                     <td th:text="${dish.cookingTime}" />
                     <td>
-                        <a th:text="update" th:href="@{/dishes/{dishId}(dishId=${dish.id})}"></a>
+                        <a th:text="update" th:href="@{/admins/{dishId}(dishId=${dish.id})}"></a>
                     </td>
                     <td>
-                        <a th:text="delete" th:href="@{/dishes/delete/{id}(id=${dish.id})}"></a>
+                        <a th:text="delete" th:href="@{/admins/delete/{id}(id=${dish.id})}"></a>
                     </td>
                 </tr>
                 </tbody>

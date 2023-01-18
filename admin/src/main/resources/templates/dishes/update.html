@@ -19,14 +19,14 @@
             <div class="collapse navbar-collapse">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="/">Главная</a>
-                    <a class="nav-item nav-link" th:href="@{/dishes/index}">Все позиции</a>
-                    <a class="nav-item nav-link active" th:href="@{/dishes/create-page}">Новая позиция</a>
+                    <a class="nav-item nav-link" th:href="@{/admins/index}">Все позиции</a>
+                    <a class="nav-item nav-link active" th:href="@{/admins/create-page}">Новая позиция</a>
                 </div>
             </div>
         </div>
     </nav>
     <div class="container">
-        <form class="mt-3" th:action="@{/dishes/update}" method="post" th:object="${dish}">
+        <form class="mt-3" th:action="@{/admins/update}" method="post" th:object="${dish}">
             <input type="hidden" name="id" th:field="*{id}">
             <div class="mb-3">
                 <label for="title" class="form-label"><b>Name of dish</b></label>
@@ -41,7 +41,7 @@
                 <div class="col-6">
                     <div class="row">
                         <div class="col-6"><button class="btn btn-primary w-100" type="submit">Сохранить</button>
-                        <div class="col-6"><a class="btn btn-primary w-100" th:href="@{/dishes/index}">Отмена</a></div>
+                        <div class="col-6"><a class="btn btn-primary w-100" th:href="@{/admins/index}">Отмена</a></div>
                         </div>
                     </div>
                 </div>
