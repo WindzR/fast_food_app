@@ -13,18 +13,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DishService {
+public class RepoServiceImpl implements RepoService {
 
     @Value("${api-url}")
     private String baseURL;
 
     private final RestTemplate client;
 
-    public DishService(final RestTemplate dishClient) {
+    public RepoServiceImpl(final RestTemplate dishClient) {
         this.client = dishClient;
     }
 
-    public DishDTO addNewDish(DishDTO dish) {
+    @Override
+    public DishDTO addEntity(DishDTO dish) {
         String url = baseURL + "/new-dish";
         System.out.println(url);
         return client.postForEntity(
@@ -32,7 +33,8 @@ public class DishService {
         ).getBody();
     }
 
-    public boolean removeDish(int id) {
+    @Override
+    public boolean removeEntity(int id) {
         String url = baseURL + "/" + id;
         System.out.println(url);
         return client.exchange(
@@ -43,7 +45,8 @@ public class DishService {
         ).getStatusCode() != HttpStatus.NOT_FOUND;
     }
 
-    public boolean changeDish(int id, DishDTO dish) {
+    @Override
+    public boolean changeEntity(int id, DishDTO dish) {
         String url = baseURL + "/" + id;
         System.out.println(url);
         return client.exchange(
@@ -54,7 +57,8 @@ public class DishService {
         ).getStatusCode() != HttpStatus.NOT_FOUND;
     }
 
-    public boolean setUnavailableDish(String id) {
+    @Override
+    public boolean setUnavailableEntity(int id) {
         String url = baseURL + "unavailable/" + id;
         System.out.println(url);
         return client.exchange(
@@ -65,7 +69,8 @@ public class DishService {
         ).getStatusCode() != HttpStatus.NOT_FOUND;
     }
 
-    public List<DishDTO> getAvailableDishes() {
+    @Override
+    public List<DishDTO> getAvailableEntities() {
         String url = baseURL + "/get-available";
         System.out.println(url);
         return client.exchange(
@@ -75,7 +80,8 @@ public class DishService {
         ).getBody();
     }
 
-    public List<DishDTO> getAllDishes() {
+    @Override
+    public List<DishDTO> getAllEntities() {
         String url = baseURL + "/all";
         System.out.println(url);
         return client.exchange(
@@ -85,7 +91,8 @@ public class DishService {
         ).getBody();
     }
 
-    public Optional<DishDTO> getDishById(int id) {
+    @Override
+    public Optional<DishDTO> getEntityById(int id) {
         String url = baseURL + "/" + id;
         System.out.println(url);
         DishDTO dish = client.getForEntity(
