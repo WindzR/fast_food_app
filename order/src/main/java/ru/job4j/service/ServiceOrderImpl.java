@@ -26,7 +26,6 @@ public class ServiceOrderImpl implements ServiceOrder {
     public Optional<OrderDTO> createOrder(Order order) {
         repository.save(order);
         OrderDTO dto = OrderDTO.fromOrder(order);
-        //
         kafkaController.sendNotification(dto);
         return Optional.of(dto);
     }
@@ -38,7 +37,6 @@ public class ServiceOrderImpl implements ServiceOrder {
             order.setId(id);
             repository.save(order);
             OrderDTO dto = OrderDTO.fromOrder(order);
-            //
             kafkaController.sendNotification(dto);
             return Optional.of(dto);
         }
@@ -53,7 +51,6 @@ public class ServiceOrderImpl implements ServiceOrder {
             currentOrder.setStatus(OrderStatus.CANCELED);
             repository.save(currentOrder);
             OrderDTO dto = OrderDTO.fromOrder(currentOrder);
-            //
             kafkaController.sendNotification(dto);
             return Optional.of(dto);
         }
