@@ -1,15 +1,18 @@
 package ru.job4j.service;
 
+import ru.job4j.dto.OrderDTO;
 import ru.job4j.model.Order;
 import ru.job4j.model.OrderStatus;
 
+import java.util.Optional;
+
 public interface ServiceOrder {
 
-    Order createOrder(Order order);
+    Optional<OrderDTO> createOrder(Order order);
 
-    Order changeOrder(Order order);
+    Optional<OrderDTO> changeOrder(int id, Order order);
 
-    Order cancelOrder(Order order);
+    Optional<OrderDTO> cancelOrder(int id);
 
-    OrderStatus getStatus(Order order);
+    Optional<OrderStatus> getStatus(int id);
 }

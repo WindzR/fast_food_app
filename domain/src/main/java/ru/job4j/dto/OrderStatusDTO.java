@@ -10,6 +10,13 @@ public class OrderStatusDTO {
 
     private String status;
 
+    public static OrderStatusDTO of(int id, String status) {
+        OrderStatusDTO statusDTO = new OrderStatusDTO();
+        statusDTO.setId(id);
+        statusDTO.setStatus(status);
+        return statusDTO;
+    }
+
     public static OrderStatusDTO fromOrderStatus(OrderStatus orderStatus) {
         OrderStatusDTO statusDTO = new OrderStatusDTO();
         String status = convert(orderStatus);
